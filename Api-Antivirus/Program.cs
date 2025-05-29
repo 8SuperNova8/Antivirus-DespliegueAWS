@@ -2,6 +2,8 @@ using Api_Antivirus.Config;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Asegúrate de que .NET cargue variables de entorno
+builder.Configuration.AddEnvironmentVariables(); 
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
@@ -9,6 +11,7 @@ builder.Services.ConfigureServices(builder.Configuration);
 builder.Services.ConfigureSwagger();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.ConfigureJwtAuthentication(builder.Configuration);
+builder.WebHost.UseUrls("http://*:80");
 
 
 //configuracion de CORS

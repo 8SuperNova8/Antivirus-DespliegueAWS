@@ -24,3 +24,5 @@ Thumbs.db
 
 # Fake build tool (si no usas FAKE, puedes quitarlo)
 /.fake
+
+.env
