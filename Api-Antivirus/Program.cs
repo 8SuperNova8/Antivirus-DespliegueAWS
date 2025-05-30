@@ -1,9 +1,21 @@
 using Api_Antivirus.Config;
+using DotNetEnv;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Asegúrate de que .NET cargue variables de entorno
-builder.Configuration.AddEnvironmentVariables(); 
+// Cargar variables de entorno desde el archivo .env
+Env.Load();
+// Acceder a las variables de entorno 
+string connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
+ 
+//builder.Services.AddDbContext<ApplicationDbContext>(options =>
+    //options.UseNpgsql(connectionString));
+
+
+// Asegura que .NET reemplace ${VARIABLES} por entornos
+//builder.Configuration.AddEnvironmentVariables()
+//.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
+
 // Add services to the container.
 builder.Services.AddControllers();
 builder.Services.AddControllersWithViews();
@@ -52,6 +64,8 @@ app.Use(async (context, next) =>
     await next();
 });
 
+//estoy imprimiendo la conexion de bd
+//Console.WriteLine("CADENA DE CONEXIÓN: " + connectionString);
 
 app.UseCors("AllowAllOrigins");
 app.UseHttpsRedirection();
