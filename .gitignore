@@ -1,6 +1,7 @@
 # Build output
 /Api-Antivirus/obj/
 /Api-Antivirus/bin/
+/Api-Antivirus/wwwroot/
 
 # User-specific files
 .vscode/

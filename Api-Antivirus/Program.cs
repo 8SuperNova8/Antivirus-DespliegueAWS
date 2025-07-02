@@ -8,13 +8,6 @@ Env.Load();
 // Acceder a las variables de entorno 
 string connectionString = Environment.GetEnvironmentVariable("ConnectionStrings__DefaultConnection");
  
-//builder.Services.AddDbContext<ApplicationDbContext>(options =>
-    //options.UseNpgsql(connectionString));
-
-
-// Asegura que .NET reemplace ${VARIABLES} por entornos
-//builder.Configuration.AddEnvironmentVariables()
-//.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
 
 // Add services to the container.
 builder.Services.AddControllers();
@@ -23,7 +16,7 @@ builder.Services.ConfigureServices(builder.Configuration);
 builder.Services.ConfigureSwagger();
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 builder.Services.ConfigureJwtAuthentication(builder.Configuration);
-builder.WebHost.UseUrls("http://*:80");
+//builder.WebHost.UseUrls("http://*:80");
 
 
 //configuracion de CORS
@@ -52,6 +45,7 @@ app.UseSwagger();
 app.UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/swagger/v1/swagger.json", "Antivirus V1");
+    c.RoutePrefix = "swagger";
 });
 
 app.Use(async (context, next) =>
